@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import MonitoringDashboard from './pages/MonitoringDashboard';
+import CostPrediction from './pages/CostPrediction';
 import { LayoutDashboard, Shield, Menu } from 'lucide-react';
 
 const Navbar = () => (
@@ -69,7 +70,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/monitoring" element={<MonitoringDashboard />} />
-        <Route path="/prediction" element={<Placeholder title="Cost Prediction" />} />
+        <Route path="/prediction" element={<CostPrediction />} />
         <Route path="/market" element={<Placeholder title="Market Analysis" />} />
         <Route path="/investment" element={<Placeholder title="Investment Insights" />} />
       </Routes>

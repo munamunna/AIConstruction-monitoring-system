@@ -1,22 +1,21 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-import random
+from .predictor import predictor
 
 class CostPredictionView(APIView):
     def post(self, request):
-        # Mock ML logic for Dubai market
-        area = request.data.get('area', 100)
-        building_type = request.data.get('type', 'Residential')
+        area = float(request.data.get('area', 1000))
+        floors = int(request.data.get('floors', 1))
+        quality = request.data.get('quality', 'Mid-range')
+        location = request.data.get('location', 'JVC')
         
-        # Base cost in AED per sq ft in Dubai (roughly 400 - 1000)
-        base_rate = 650 if building_type == 'Residential' else 850
-        predicted_cost = area * base_rate * random.uniform(0.9, 1.1)
+        result = predictor.predict(area, floors, quality, location)
         
         return Response({
-            'predicted_cost_aed': round(predicted_cost, 2),
+            'prediction': result,
             'currency': 'AED',
-            'market_trend': 'Stable',
-            'location': 'Dubai, UAE'
+            'location': location,
+            'timestamp': '2026-05-01'
         })
 
 class MarketAnalysisView(APIView):
