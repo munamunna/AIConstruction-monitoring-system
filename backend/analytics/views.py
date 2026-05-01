@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .predictor import predictor
+from datetime import datetime
 
 class CostPredictionView(APIView):
     def post(self, request):
@@ -18,11 +19,16 @@ class CostPredictionView(APIView):
             'timestamp': '2026-05-01'
         })
 
+from .market_data import market_intel
+
 class MarketAnalysisView(APIView):
     def get(self, request):
+        trends = market_intel.get_market_trends()
+        areas = market_intel.get_area_analysis()
+        
         return Response({
-            'supply_growth': '4.2%',
-            'demand_index': 8.5,
-            'top_areas': ['Dubai Marina', 'Business Bay', 'JVC'],
-            'investment_rating': 'Strong Buy'
+            'history': trends,
+            'area_analysis': areas,
+            'global_sentiment': 'Bullish',
+            'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M')
         })
