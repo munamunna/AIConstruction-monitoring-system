@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import MonitoringDashboard from './pages/MonitoringDashboard';
 import CostPrediction from './pages/CostPrediction';
 import MarketAnalysis from './pages/MarketAnalysis';
+import InvestmentTools from './pages/InvestmentTools';
 import { LayoutDashboard, Shield, Menu } from 'lucide-react';
 
 const Navbar = () => (
@@ -16,6 +17,7 @@ const Navbar = () => (
       <Link to="/monitoring">AI Monitoring</Link>
       <Link to="/prediction">Cost Prediction</Link>
       <Link to="/market">Market Analysis</Link>
+      <Link to="/investment">Investment Tools</Link>
     </div>
     <div className="nav-actions">
       <button className="secondary" style={{ padding: '0.5rem 1rem' }}>Login</button>
@@ -73,7 +75,7 @@ function App() {
         <Route path="/monitoring" element={<MonitoringDashboard />} />
         <Route path="/prediction" element={<CostPrediction />} />
         <Route path="/market" element={<MarketAnalysis />} />
-        <Route path="/investment" element={<Placeholder title="Investment Insights" />} />
+        <Route path="/investment" element={<InvestmentTools />} />
       </Routes>
     </Router>
   );

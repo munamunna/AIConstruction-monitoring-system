@@ -21,6 +21,8 @@ class CostPredictionView(APIView):
 
 from .market_data import market_intel
 
+from .investment import investment_analyzer
+
 class MarketAnalysisView(APIView):
     def get(self, request):
         trends = market_intel.get_market_trends()
@@ -32,3 +34,19 @@ class MarketAnalysisView(APIView):
             'global_sentiment': 'Bullish',
             'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M')
         })
+
+from .investment import investment_analyzer
+
+class InvestmentAnalysisView(APIView):
+    def post(self, request):
+        price = float(request.data.get('purchase_price', 1000000))
+        rent = float(request.data.get('annual_rent', 80000))
+        appreciation = float(request.data.get('appreciation', 0.05))
+        
+        result = investment_analyzer.calculate_roi(
+            purchase_price=price,
+            rental_income=rent,
+            appreciation_rate=appreciation
+        )
+        
+        return Response(result)
